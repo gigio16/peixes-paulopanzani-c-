@@ -1,10 +1,4 @@
-﻿using System;
-
-class Program
-{
-    static void Main()
-    {
-        //número de peixes o
+﻿//número de peixes 0
         Console.Write("Digite o número de peixes no lago (máximo 50): ");
         int numPeixes = int.Parse(Console.ReadLine());
 
@@ -15,19 +9,19 @@ class Program
             return;
         }
 
-        bool[] lago = new bool[50]; 
-        Random random = new Random();
+        bool[] lago = new bool[50];
+        Random[] random = new Random[];
 
         // coloca os peixes aleatoriamente no lago
         for (int i = 0; i < numPeixes; i++)
         {
-            int pos;
+            int peixes;
             do
             {
-                pos = random.Next(0, 50); // random é uma uma biblioteca que distribui numeros aleatoriamente
+                peixes = random.Next(0, 50); // random é uma uma biblioteca que distribui numeros aleatoriamente
             }
             while (lago[pos]); // se houver peixe, tenta outra posição
-            lago[pos] = true;
+            lago[peixes] = true;
         }
 
         //  número de jogadores
@@ -55,25 +49,31 @@ class Program
             for (int j = 0; j < numJogadores; j++)
             {
                 // pergunta ao jogador qual posição ele escolhe
+
                 Console.WriteLine(jogadores[j] + ", sua vez de lançar a isca! Tentativa " + rodada + " de " + tentativas);
                 Console.Write("Digite a posição do lago para lançar a isca (0-49): ");
                 int posicao = int.Parse(Console.ReadLine());
+
+
                 if (posicao >= 0 && posicao < 50)
                 {
                     if (lago[posicao])
                     {
                         Console.WriteLine("Parabéns, " + jogadores[j] + "! Você pescou um peixe na posição " + posicao + ".");
                         peixesPegos[j]++;
+
                         lago[posicao] = false; // vai remove o peixe da posição
                     }
                     else
                     {
                         Console.WriteLine("Infelizmente, não havia peixe nessa posição.");
                     }
+
+
                 }
                 else
                 {
-                    Console.WriteLine("Posição inválida! Escolha um número entre 0 e 49.");
+                    Console.WriteLine("Você pescou uma bota!Tenta a sorte denovo e escolha um número entre 0 e 49.");
                     j--; // repete a vez do jogador, pois ele escolheu uma posição que nao á peixe
                 }
             }
@@ -83,6 +83,7 @@ class Program
         int maxPeixes = 0;
         int vencedor = -1;
         bool empate = false;
+
 
         for (int i = 0; i < numJogadores; i++)
         {
@@ -110,5 +111,5 @@ class Program
             Console.WriteLine("O vencedor é " + jogadores[vencedor] + " com " + maxPeixes + " peixe(s)!");
 
         }
-    }
 }
+
